@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -21,8 +22,8 @@ public class Parent extends BasePersonEntity{
 
     private Parent(){}
 
-    public Parent(String firstName, String middleName, String lastName, int EGN, int age, Town town, String email, int phoneNumber) {
-        super(firstName, middleName, lastName, EGN, age, town, email);
+    public Parent(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email, int phoneNumber) {
+        super(firstName, middleName, lastName, EGN, age, gender, town, email);
         setPhoneNumber(phoneNumber);
         this.students = new HashSet<>();
     }

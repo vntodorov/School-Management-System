@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.enums.Gender;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,8 +15,8 @@ public class Teacher extends BasePersonEntity{
 
     private Teacher(){}
 
-    public Teacher(String firstName, String middleName, String lastName, int EGN,  int age, Town town, String email, Subject subject) {
-        super(firstName, middleName, lastName, EGN, age, town, email);
+    public Teacher(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email, Subject subject) {
+        super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.subject = subject;
     }
 

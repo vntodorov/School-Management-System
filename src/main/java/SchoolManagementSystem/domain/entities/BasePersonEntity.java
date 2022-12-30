@@ -1,9 +1,8 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.enums.Gender;
 import SchoolManagementSystem.exceptions.EntityException;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
 import java.util.regex.Pattern;
 
@@ -25,7 +24,10 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     @Column(nullable = false)
     private int age;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Town town;
 
     @Column
@@ -33,25 +35,26 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
 
     protected BasePersonEntity(){}
 
-    protected BasePersonEntity(String firstName, String middleName, String lastName, int EGN, int age, Town town, String email) {
+    protected BasePersonEntity(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email) {
         setFirstName(firstName);
         setMiddleName(middleName);
         setLastName(lastName);
         setEGN(EGN);
         setAge(age);
+        setGender(gender);
         setTown(town);
         setEmail(email);
     }
 
-    protected void setEmail(String email) {
+    public void setEmail(String email) {
         String emailValidator = "^[^\\?=.@,\\/\\\\;'\\[\\]-][A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[^-][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
-        if (Pattern.compile(emailValidator).matcher(email).matches()){
+        if (!Pattern.compile(emailValidator).matcher(email).matches()){
             throw new EntityException("Invalid email!");
         }
         this.email = email;
     }
 
-    protected void setEGN(int EGN) {
+    public void setEGN(int EGN) {
         int length = 0;
         int temp = 1;
         while (temp <= EGN) {
@@ -64,30 +67,38 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
         this.EGN = EGN;
     }
 
-    protected void setAge(int age) {
+    public void setAge(int age) {
         if (age <= 0) {
             throw new EntityException("Age must be a valid number!");
         }
         this.age = age;
     }
 
-    protected void setTown(Town town) {
+    public void setTown(Town town) {
         this.town = town;
     }
 
-    protected void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    protected void setMiddleName(String middleName) {
+    public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
-    protected void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
+
+
+    public Gender getGender() {
+        return gender;
+    }
 
     public String getFirstName() {
         return firstName;

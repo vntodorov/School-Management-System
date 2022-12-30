@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.enums.Gender;
 import SchoolManagementSystem.domain.enums.Mark;
 import jakarta.persistence.*;
 
@@ -26,14 +27,14 @@ public class Student extends BasePersonEntity {
     @Enumerated(EnumType.ORDINAL)
     private List<Mark> marks;
 
-    @Column(name = "enroll_date")
+    @Column(name = "enroll_date", nullable = false)
     private LocalDate enrollDate;
 
     private Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, int EGN, int age, String email, Town town) {
-        super(firstName, middleName, lastName, EGN, age, town, email);
+    public Student(String firstName, String middleName, String lastName, Gender gender, int EGN, int age, String email, Town town) {
+        super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.clubs = new HashSet<>();
         this.marks = new ArrayList<>();
         this.enrollDate = LocalDate.now();
@@ -51,4 +52,7 @@ public class Student extends BasePersonEntity {
         return enrollDate;
     }
 
+    public void setEnrollDate(LocalDate enrollDate) {
+        this.enrollDate = enrollDate;
+    }
 }
