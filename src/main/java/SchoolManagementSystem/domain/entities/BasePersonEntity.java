@@ -19,7 +19,7 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     private String lastName;
 
     @Column(nullable = false)
-    private int EGN;
+    private String EGN;
 
     @Column(nullable = false)
     private int age;
@@ -35,7 +35,7 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
 
     protected BasePersonEntity(){}
 
-    protected BasePersonEntity(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email) {
+    protected BasePersonEntity(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email) {
         setFirstName(firstName);
         setMiddleName(middleName);
         setLastName(lastName);
@@ -54,14 +54,8 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
         this.email = email;
     }
 
-    public void setEGN(int EGN) {
-        int length = 0;
-        int temp = 1;
-        while (temp <= EGN) {
-            length++;
-            temp *= 10;
-        }
-        if (length != 10) {
+    public void setEGN(String EGN) {
+        if (EGN.length() != 10) {
             throw new EntityException("EGN must be a 10-digit number");
         }
         this.EGN = EGN;
@@ -112,7 +106,7 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
         return lastName;
     }
 
-    public int getEGN() {
+    public String getEGN() {
         return EGN;
     }
 

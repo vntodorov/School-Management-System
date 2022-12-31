@@ -19,7 +19,7 @@ public class Employee extends BasePersonEntity{
 
     private Employee(){}
 
-    public Employee(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email, String jobTitle, int workHours, Department department){
+    public Employee(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email, String jobTitle, int workHours, Department department){
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.jobTitle = jobTitle;
         this.workHours = workHours;

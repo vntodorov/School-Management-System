@@ -11,7 +11,7 @@ public abstract class CreatePersonDTO {
 
     private String lastName;
 
-    private int EGN;
+    private String EGN;
 
     private int age;
 
@@ -21,7 +21,7 @@ public abstract class CreatePersonDTO {
 
     private String email;
 
-    public CreatePersonDTO(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email) {
+    public CreatePersonDTO(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -44,7 +44,7 @@ public abstract class CreatePersonDTO {
         return lastName;
     }
 
-    public int getEGN() {
+    public String getEGN() {
         return EGN;
     }
 
@@ -76,7 +76,7 @@ public abstract class CreatePersonDTO {
         this.lastName = lastName;
     }
 
-    public void setEGN(int EGN) {
+    public void setEGN(String EGN) {
         this.EGN = EGN;
     }
 

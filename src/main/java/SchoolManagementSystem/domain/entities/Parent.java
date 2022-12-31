@@ -22,7 +22,7 @@ public class Parent extends BasePersonEntity{
 
     private Parent(){}
 
-    public Parent(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email, int phoneNumber) {
+    public Parent(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email, int phoneNumber) {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         setPhoneNumber(phoneNumber);
         this.students = new HashSet<>();

@@ -15,7 +15,7 @@ public class Teacher extends BasePersonEntity{
 
     private Teacher(){}
 
-    public Teacher(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email, Subject subject) {
+    public Teacher(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email, Subject subject) {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.subject = subject;
     }

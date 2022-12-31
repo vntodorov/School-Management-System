@@ -33,7 +33,7 @@ public class Student extends BasePersonEntity {
     private Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, Gender gender, int EGN, int age, String email, Town town) {
+    public Student(String firstName, String middleName, String lastName, Gender gender, String EGN, int age, String email, Town town) {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.clubs = new HashSet<>();
         this.marks = new ArrayList<>();

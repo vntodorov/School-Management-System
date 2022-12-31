@@ -24,15 +24,42 @@ public class CreateStudentDTO extends CreatePersonDTO{
     private LocalDate enrollDate;
 
 
-    public CreateStudentDTO(String firstName, String middleName, String lastName, int EGN, int age, Gender gender, Town town, String email) {
+    public CreateStudentDTO(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email) {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.clubs = new HashSet<>();
         this.marks = new ArrayList<>();
         this.enrollDate = LocalDate.now();
     }
 
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
+    public Set<Club> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(Set<Club> clubs) {
+        this.clubs = clubs;
+    }
+
+    public List<Mark> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(List<Mark> marks) {
+        this.marks = marks;
+    }
+
     public LocalDate getEnrollDate() {
         return enrollDate;
     }
 
+    public void setEnrollDate(LocalDate enrollDate) {
+        this.enrollDate = enrollDate;
+    }
 }
