@@ -8,7 +8,7 @@ Welcome to the <b>School Management System</b> project - an app written in the J
 <img src="https://user-images.githubusercontent.com/107515077/210149454-ede5495c-601b-42b1-90b3-6ec4c105a15c.png" width="350" height="400">
 <p>
 
-<b><i>Note: The app is in active development and its recieving constant updates with new features! Everything below is subject to change!</b></i>
+<b><i>Note: The app is in active development and it’s receiving constant updates with new features! Everything below is subject to change!</b></i>
 
 ## 📝 Full Description
 The software will play the role of a school data management system and will allow you to perform everything for a successful supervision. <br>
