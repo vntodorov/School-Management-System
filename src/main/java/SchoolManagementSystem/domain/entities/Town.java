@@ -36,4 +36,5 @@ public class Town extends BaseEntityWithIdLong{
     public void setCountry(Country country) {
         this.country = country;
     }
+
 }

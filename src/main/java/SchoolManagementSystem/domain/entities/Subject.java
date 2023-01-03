@@ -1,9 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "subjects")
@@ -12,7 +9,7 @@ public class Subject extends BaseEntityWithIdLong{
     @Column
     private String name;
 
-    @OneToOne(mappedBy = "subject")
+    @OneToOne(mappedBy = "subject", cascade = CascadeType.PERSIST)
     private Teacher teacher;
 
     public Subject(){}

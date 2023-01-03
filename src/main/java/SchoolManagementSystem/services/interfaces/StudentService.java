@@ -1,12 +1,11 @@
 package SchoolManagementSystem.services.interfaces;
 
 
-import SchoolManagementSystem.domain.DTOs.CreateStudentDTO;
-import SchoolManagementSystem.domain.entities.Student;
+import java.util.List;
 
 public interface StudentService {
 
-    void addStudent(CreateStudentDTO student);
+    String addStudent(List<String> studentData);
 
 
 }

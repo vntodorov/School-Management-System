@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "teachers")
 public class Teacher extends BasePersonEntity{
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
@@ -22,5 +22,18 @@ public class Teacher extends BasePersonEntity{
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder out = new StringBuilder(super.toString());
+        out.append("Subject: ").append(subject.getName()).append(System.lineSeparator());
+
+        return out.toString().trim();
+
     }
 }

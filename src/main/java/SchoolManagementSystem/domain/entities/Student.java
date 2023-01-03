@@ -37,7 +37,7 @@ public class Student extends BasePersonEntity {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         this.clubs = new HashSet<>();
         this.marks = new ArrayList<>();
-        this.enrollDate = LocalDate.now();
+        setEnrollDate(LocalDate.now());
     }
 
     public Set<Club> getClubs() {
@@ -55,4 +55,6 @@ public class Student extends BasePersonEntity {
     public void setEnrollDate(LocalDate enrollDate) {
         this.enrollDate = enrollDate;
     }
+
+
 }

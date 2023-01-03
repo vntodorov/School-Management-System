@@ -27,13 +27,14 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Town town;
 
     @Column
     private String email;
 
-    protected BasePersonEntity(){}
+    protected BasePersonEntity() {
+    }
 
     protected BasePersonEntity(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email) {
         setFirstName(firstName);
@@ -47,24 +48,14 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     }
 
     public void setEmail(String email) {
-        String emailValidator = "^[^\\?=.@,\\/\\\\;'\\[\\]-][A-Za-z\\d_-]+(\\.[A-Za-z\\d_-]+)*@[^-][A-Za-z\\d-]+(\\.[A-Za-z\\d-]+)*(\\.[A-Za-z]{2,})$";
-        if (!Pattern.compile(emailValidator).matcher(email).matches()){
-            throw new EntityException("Invalid email!");
-        }
         this.email = email;
     }
 
     public void setEGN(String EGN) {
-        if (EGN.length() != 10) {
-            throw new EntityException("EGN must be a 10-digit number");
-        }
         this.EGN = EGN;
     }
 
     public void setAge(int age) {
-        if (age <= 0) {
-            throw new EntityException("Age must be a valid number!");
-        }
         this.age = age;
     }
 
@@ -87,7 +78,6 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-
 
 
     public Gender getGender() {
@@ -120,5 +110,22 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder info = new StringBuilder();
+
+        info.append("First name: ").append(firstName).append(System.lineSeparator())
+                .append("Middle name: ").append(middleName).append(System.lineSeparator())
+                .append("Last name: ").append(lastName).append(System.lineSeparator())
+                .append("EGN: ").append(EGN).append(System.lineSeparator())
+                .append("Age: ").append(age).append(System.lineSeparator())
+                .append("Gender: ").append(gender).append(System.lineSeparator())
+                .append("Town: ").append(town.getName()).append(System.lineSeparator())
+                .append("Email: ").append(email).append(System.lineSeparator());
+
+        return info.toString().trim();
+
     }
 }
