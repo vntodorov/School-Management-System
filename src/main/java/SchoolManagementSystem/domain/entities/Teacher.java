@@ -31,7 +31,8 @@ public class Teacher extends BasePersonEntity{
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder(super.toString());
-        out.append("Subject: ").append(subject.getName()).append(System.lineSeparator());
+        out.append(System.lineSeparator())
+                .append("Subject: ").append(subject.getName()).append(System.lineSeparator());
 
         return out.toString().trim();
 

@@ -9,14 +9,10 @@ public class Subject extends BaseEntityWithIdLong{
     @Column
     private String name;
 
-    @OneToOne(mappedBy = "subject", cascade = CascadeType.PERSIST)
-    private Teacher teacher;
-
     public Subject(){}
 
-    public Subject(String name, Teacher teacher){
+    public Subject(String name){
         this.name = name;
-        this.teacher = teacher;
     }
 
     public String getName() {
@@ -27,11 +23,4 @@ public class Subject extends BaseEntityWithIdLong{
         this.name = name;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
 }
