@@ -1,22 +1,30 @@
 package SchoolManagementSystem.services;
 
+import SchoolManagementSystem.domain.DTOs.AddCountryDTO;
 import SchoolManagementSystem.domain.entities.Country;
 import SchoolManagementSystem.exceptions.EntityException;
 import SchoolManagementSystem.repositories.CountryRepository;
 import SchoolManagementSystem.services.interfaces.CountryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static SchoolManagementSystem.constants.Validations.*;
 
 @Service
 public class CountryServiceImpl implements CountryService {
 
     private final CountryRepository countryRepository;
 
+    private final ModelMapper mapper;
+
     @Autowired
-    public CountryServiceImpl(CountryRepository countryRepository) {
+    public CountryServiceImpl(CountryRepository countryRepository, ModelMapper mapper) {
         this.countryRepository = countryRepository;
+        this.mapper = mapper;
     }
 
 
@@ -34,5 +42,20 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country findByName(String countryName) {
         return this.countryRepository.findByName(countryName).orElseThrow(() -> new EntityException("Country with the name " + countryName + " does not exist!"));
+    }
+
+    @Override
+    @Transactional
+    public String addCountry(String countryName) {
+
+        if (countryRepository.existsByName(countryName)){
+            return COUNTRY_ALREADY_EXISTS;
+        }
+
+        AddCountryDTO countryDTO = new AddCountryDTO(countryName);
+
+        countryRepository.save(mapper.map(countryDTO, Country.class));
+
+        return SUCCESSFULLY_ADDED_COUNTRY;
     }
 }

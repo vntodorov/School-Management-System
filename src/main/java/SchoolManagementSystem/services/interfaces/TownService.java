@@ -11,4 +11,6 @@ public interface TownService {
     boolean isDataSeeded();
 
     Town findByName(String townName);
+
+    String addTown(String townName);
 }

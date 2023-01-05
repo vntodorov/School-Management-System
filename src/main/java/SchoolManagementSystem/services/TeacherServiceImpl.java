@@ -2,7 +2,6 @@ package SchoolManagementSystem.services;
 
 import SchoolManagementSystem.domain.DTOs.AddTeacherDTO;
 import SchoolManagementSystem.domain.DTOs.SubjectDTO;
-import SchoolManagementSystem.domain.entities.Subject;
 import SchoolManagementSystem.domain.entities.Teacher;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
@@ -12,15 +11,15 @@ import SchoolManagementSystem.repositories.SubjectRepository;
 import SchoolManagementSystem.repositories.TeacherRepository;
 import SchoolManagementSystem.repositories.TownRepository;
 import SchoolManagementSystem.services.interfaces.TeacherService;
+import SchoolManagementSystem.services.interfaces.TownService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-import static SchoolManagementSystem.Constants.Validations.*;
+import static SchoolManagementSystem.constants.Validations.*;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -29,6 +28,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TownRepository townRepository;
 
+    private final TownService townService;
+
     private final ModelMapper modelMapper;
 
     private final CountryRepository countryRepository;
@@ -36,9 +37,10 @@ public class TeacherServiceImpl implements TeacherService {
     private final SubjectRepository subjectRepository;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository, TownRepository townRepository, ModelMapper modelMapper, CountryRepository countryRepository, SubjectRepository subjectRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, TownRepository townRepository, TownService townService, ModelMapper modelMapper, CountryRepository countryRepository, SubjectRepository subjectRepository) {
         this.teacherRepository = teacherRepository;
         this.townRepository = townRepository;
+        this.townService = townService;
         this.modelMapper = modelMapper;
         this.countryRepository = countryRepository;
         this.subjectRepository = subjectRepository;
@@ -62,7 +64,13 @@ public class TeacherServiceImpl implements TeacherService {
         AddTeacherDTO teacherDTO;
 
         if (!checkTown(townRepository, countryRepository, townName)){
-            return NO_ANSWER;
+
+            if (wantToAdd()){
+                System.out.println(townService.addTown(townName));
+            } else {
+                return NO_ANSWER;
+            }
+
         }
 
         Town town = townRepository.findByName(townName).orElseThrow();

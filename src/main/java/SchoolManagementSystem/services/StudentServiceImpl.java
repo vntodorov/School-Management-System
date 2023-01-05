@@ -1,6 +1,6 @@
 package SchoolManagementSystem.services;
 
-import static SchoolManagementSystem.Constants.Validations.*;
+import static SchoolManagementSystem.constants.Validations.*;
 
 import SchoolManagementSystem.domain.DTOs.AddStudentDTO;
 import SchoolManagementSystem.domain.entities.Student;
@@ -11,6 +11,7 @@ import SchoolManagementSystem.repositories.CountryRepository;
 import SchoolManagementSystem.repositories.StudentRepository;
 import SchoolManagementSystem.repositories.TownRepository;
 import SchoolManagementSystem.services.interfaces.StudentService;
+import SchoolManagementSystem.services.interfaces.TownService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,17 @@ public class StudentServiceImpl implements StudentService {
 
     private final TownRepository townRepository;
 
+    private final TownService townService;
+
     private final ModelMapper modelMapper;
 
     private final CountryRepository countryRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, TownRepository townRepository, ModelMapper modelMapper, CountryRepository countryRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, TownRepository townRepository, TownService townService, ModelMapper modelMapper, CountryRepository countryRepository) {
         this.studentRepository = studentRepository;
         this.townRepository = townRepository;
+        this.townService = townService;
         this.modelMapper = modelMapper;
         this.countryRepository = countryRepository;
     }
@@ -54,7 +58,13 @@ public class StudentServiceImpl implements StudentService {
         AddStudentDTO studentDTO;
 
         if (!checkTown(townRepository, countryRepository, townName)){
-            return NO_ANSWER;
+
+            if (wantToAdd()){
+                System.out.println(townService.addTown(townName));
+            } else {
+                return NO_ANSWER;
+            }
+
         }
 
         Town town = townRepository.findByName(townName).orElseThrow();

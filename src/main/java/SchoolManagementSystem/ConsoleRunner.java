@@ -1,25 +1,24 @@
 package SchoolManagementSystem;
 
 import SchoolManagementSystem.services.interfaces.*;
-import SchoolManagementSystem.services.seed.SeedService;
+import SchoolManagementSystem.services.seed.BaseSeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static SchoolManagementSystem.Constants.Commands.*;
-import static SchoolManagementSystem.Constants.ConsoleMessages.*;
+import static SchoolManagementSystem.constants.Commands.*;
+import static SchoolManagementSystem.constants.ConsoleMessages.*;
 
 @Component
 public class ConsoleRunner implements CommandLineRunner {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    private final SeedService seedService;
+    private final BaseSeedService baseSeedService;
 
     private final StudentService studentService;
 
@@ -31,36 +30,47 @@ public class ConsoleRunner implements CommandLineRunner {
 
     private final TownService townService;
 
+    private final CountryService countryService;
+
     @Autowired
-    public ConsoleRunner(SeedService seedService, StudentService studentService, TeacherService teacherService, EmployeeService employeeService, ClubService clubService, TownService townService) {
-        this.seedService = seedService;
+    public ConsoleRunner(BaseSeedService baseSeedService, StudentService studentService, TeacherService teacherService, EmployeeService employeeService, ClubService clubService, TownService townService, CountryService countryService) {
+        this.baseSeedService = baseSeedService;
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.employeeService = employeeService;
         this.clubService = clubService;
         this.townService = townService;
+        this.countryService = countryService;
     }
 
 
     @Override
     public void run(String... args) throws Exception {
-        seedNeededData();
+        baseSeedService.seedAllBaseData();
 
         String input = scanner.nextLine();
 
-        while (!"End".equals(input)){
+        while (!"End".equals(input)) {
 
-            switch (input){
-                case ADD_STUDENT_COMMAND:
-                    System.out.println(studentService.addStudent(requestStudentInformation()));
-                    break;
-                case ADD_TEACHER_COMMAND:
-                    System.out.println(teacherService.addTeacher(requestTeacherInformation()));
-                    break;
-            }
+            String result = switch (input) {
+                case ADD_STUDENT_COMMAND -> studentService.addStudent(requestStudentInformation());
+                case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestTeacherInformation());
+                case ADD_COUNTRY -> countryService.addCountry(requestCountryInformation());
+                case ADD_TOWN -> townService.addTown(requestTownInformation());
+                default -> "No such command!";
+            };
 
+            System.out.println(result);
             input = scanner.nextLine();
         }
+    }
+
+    private String requestTownInformation() {
+        System.out.println(ADD_TOWN_BEGIN);
+
+        System.out.print(TOWN_NAME);
+
+        return scanner.nextLine();
     }
 
     private List<String> requestStudentInformation() {
@@ -68,7 +78,7 @@ public class ConsoleRunner implements CommandLineRunner {
         return requestPersonInformation();
     }
 
-    private List<String> requestTeacherInformation(){
+    private List<String> requestTeacherInformation() {
         System.out.println(ADD_TEACHER_BEGIN);
         List<String> teacherData = new ArrayList<>(requestPersonInformation());
 
@@ -81,7 +91,15 @@ public class ConsoleRunner implements CommandLineRunner {
 
     }
 
-    private List<String> requestPersonInformation(){
+    private String requestCountryInformation() {
+        System.out.println(ADD_COUNTRY_BEGIN);
+
+        System.out.print(COUNTRY_NAME);
+
+        return scanner.nextLine();
+    }
+
+    private List<String> requestPersonInformation() {
 
         System.out.print(PERSON_FIRST_NAME);
         String firstName = scanner.nextLine();
@@ -110,7 +128,4 @@ public class ConsoleRunner implements CommandLineRunner {
         return List.of(firstName, middleName, lastName, EGN, age, gender, townName, email);
     }
 
-    private void seedNeededData() throws IOException {
-        seedService.seedNeededData();
-    }
 }

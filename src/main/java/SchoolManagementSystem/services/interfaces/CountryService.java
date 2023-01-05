@@ -13,4 +13,7 @@ public interface CountryService {
 
     Country findByName(String countryName);
 
+    String addCountry(String countryName);
+
+
 }
