@@ -36,10 +36,10 @@ A basic managment system for a virtual school - you can build, organize and cont
 * [Hibernate](https://hibernate.org)
 * [MySQL Connector](https://www.mysql.com/products/connector)
 * [Model Mapper](https://modelmapper.org)
+* [GSON](https://github.com/google/gson)
 ---
 * [SOLID principles](https://www.baeldung.com/solid-principles)
 * [Design Patterns](https://refactoring.guru/design-patterns)
-* [GSON](https://github.com/google/gson)
   
 ## 🗂 Database Diagram
 ![school_management_system_db](https://user-images.githubusercontent.com/107515077/210186832-8aa7fefe-8614-46aa-8d07-cf795e847c3a.png)
