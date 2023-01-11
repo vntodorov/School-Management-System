@@ -1,10 +1,11 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BaseEntityWithIdLong;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "subjects")
-public class Subject extends BaseEntityWithIdLong{
+public class Subject extends BaseEntityWithIdLong {
 
     @Column
     private String name;

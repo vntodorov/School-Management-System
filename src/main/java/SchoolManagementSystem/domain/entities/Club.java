@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BaseEntityWithIdLong;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clubs")
-public class Club extends BaseEntityWithIdLong{
+public class Club extends BaseEntityWithIdLong {
 
     @Column
     private String name;

@@ -55,8 +55,10 @@ public class ConsoleRunner implements CommandLineRunner {
             String result = switch (input) {
                 case ADD_STUDENT_COMMAND -> studentService.addStudent(requestAddStudentInformation());
                 case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestAddTeacherInformation());
+                case ADD_EMPLOYEE_COMMAND -> employeeService.addEmployee(requestAddEmployeeInformation());
                 case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewInformation());
                 case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewInformation());
+                case VIEW_EMPLOYEE_INFO -> employeeService.viewEmployeeInfo(requestViewInformation());
 
                 default -> "No such command!";
             };
@@ -90,9 +92,30 @@ public class ConsoleRunner implements CommandLineRunner {
         teacherData.add(subject);
 
         return teacherData;
-
-
     }
+
+    private List<String> requestAddEmployeeInformation() {
+        System.out.println(ADD_EMPLOYEE_BEGIN);
+        List<String> employeeData = new ArrayList<>(requestPersonInformation());
+
+        System.out.print(EMPLOYEE_JOB_TITLE);
+        String jobTitle = scanner.nextLine();
+
+        System.out.print(EMPLOYEE_WORK_HOURS);
+        String workHours = scanner.nextLine();
+
+        System.out.print(EMPLOYEE_DEPARTMENT);
+        String department = scanner.nextLine();
+
+
+        employeeData.add(jobTitle);
+        employeeData.add(workHours);
+        employeeData.add(department);
+
+        return employeeData;
+    }
+
+
 
     private List<String> requestPersonInformation() {
 

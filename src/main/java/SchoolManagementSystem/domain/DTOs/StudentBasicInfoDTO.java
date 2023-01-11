@@ -1,68 +1,16 @@
 package SchoolManagementSystem.domain.DTOs;
 
-public class StudentBasicInfoDTO {
+import SchoolManagementSystem.domain.DTOs.base.ViewPersonInfoDTO;
 
-    private String firstName;
+import static SchoolManagementSystem.constants.Validations.SUCCESSFULLY_VIEW_STUDENT;
 
-    private String middleName;
-
-    private String lastName;
-
-    private int age;
-
-    private String email;
+public class StudentBasicInfoDTO extends ViewPersonInfoDTO {
 
     public StudentBasicInfoDTO() {
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    private String getFullName() {
-        return firstName + " " + middleName + " " + lastName;
-    }
-
     @Override
     public String toString() {
-        return getFullName() + System.lineSeparator()
-                + "    Age: " + age + System.lineSeparator()
-                + "    Email: " + email;
+        return String.format(SUCCESSFULLY_VIEW_STUDENT, super.toString());
     }
 }

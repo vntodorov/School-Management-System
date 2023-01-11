@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static SchoolManagementSystem.constants.EntityExceptionMessages.*;
 import static SchoolManagementSystem.constants.Validations.*;
 
 @Service
@@ -41,7 +42,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country findByName(String countryName) {
-        return this.countryRepository.findByName(countryName).orElseThrow(() -> new EntityException("Country with the name " + countryName + " does not exist!"));
+        return this.countryRepository.findByName(countryName).orElseThrow(() -> new EntityException(String.format(COUNTRY_EXCEPTION, countryName)));
     }
 
     @Override

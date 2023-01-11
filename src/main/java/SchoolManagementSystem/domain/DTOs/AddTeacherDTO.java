@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.DTOs;
 
+import SchoolManagementSystem.domain.DTOs.base.AddPersonEntityDTO;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
 

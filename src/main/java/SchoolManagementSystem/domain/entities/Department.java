@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BaseEntityWithIdLong;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "departments")
-public class Department extends BaseEntityWithIdLong{
+public class Department extends BaseEntityWithIdLong {
 
     @Column(nullable = false)
     private String name;
@@ -25,10 +26,20 @@ public class Department extends BaseEntityWithIdLong{
         this.employees = new HashSet<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
 
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
 
 }

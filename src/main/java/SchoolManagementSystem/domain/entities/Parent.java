@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BasePersonEntity;
 import SchoolManagementSystem.domain.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "parents")
-public class Parent extends BasePersonEntity{
+public class Parent extends BasePersonEntity {
 
     @Column
     private int phoneNumber;

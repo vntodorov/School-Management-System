@@ -1,10 +1,11 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BaseEntityWithIdLong;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "towns")
-public class Town extends BaseEntityWithIdLong{
+public class Town extends BaseEntityWithIdLong {
 
     @Column
     private String name;

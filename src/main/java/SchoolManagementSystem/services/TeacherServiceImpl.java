@@ -30,24 +30,17 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
 
-    private final TownRepository townRepository;
-
     private final TownService townService;
 
     private final ModelMapper modelMapper;
 
-    private final CountryRepository countryRepository;
-
-    private final SubjectRepository subjectRepository;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository, TownRepository townRepository, TownService townService, ModelMapper modelMapper, CountryRepository countryRepository, SubjectRepository subjectRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, TownService townService, ModelMapper modelMapper) {
         this.teacherRepository = teacherRepository;
-        this.townRepository = townRepository;
         this.townService = townService;
         this.modelMapper = modelMapper;
-        this.countryRepository = countryRepository;
-        this.subjectRepository = subjectRepository;
+
     }
 
     @Override
@@ -75,7 +68,7 @@ public class TeacherServiceImpl implements TeacherService {
             System.out.println(resultOfAddingTown);
         }
 
-        Town town = townRepository.findByName(townName).orElseThrow();
+        Town town = townService.findByName(townName);
 
         try {
             teacherDTO = new AddTeacherDTO(firstName, middleName, lastName, EGN, age, gender, town, email, subjectToAdd);

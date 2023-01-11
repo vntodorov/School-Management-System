@@ -1,5 +1,6 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BasePersonEntity;
 import SchoolManagementSystem.domain.enums.Gender;
 import SchoolManagementSystem.domain.enums.Mark;
 import jakarta.persistence.*;

@@ -1,11 +1,12 @@
 package SchoolManagementSystem.domain.entities;
 
+import SchoolManagementSystem.domain.entities.base.BasePersonEntity;
 import SchoolManagementSystem.domain.enums.Gender;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "teachers")
-public class Teacher extends BasePersonEntity{
+public class Teacher extends BasePersonEntity {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")

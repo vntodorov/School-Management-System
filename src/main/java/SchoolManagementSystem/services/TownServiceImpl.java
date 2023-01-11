@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static SchoolManagementSystem.constants.ConsoleMessages.COUNTRY_NAME;
+import static SchoolManagementSystem.constants.EntityExceptionMessages.TOWN_EXCEPTION;
 import static SchoolManagementSystem.constants.Validations.*;
 
 @Service
@@ -51,16 +52,16 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public Town findByName(String townName) {
-        return this.townRepository.findByName(townName).orElseThrow(() -> new EntityException("Cannot find a town with name " + townName));
+        return this.townRepository.findByName(townName).orElseThrow(() -> new EntityException(String.format(TOWN_EXCEPTION, townName)));
     }
 
     @Override
     @Transactional
     public String addTown(String townName) {
 
-        if (!checkTown(townRepository, townName)){
+        if (!checkTown(townRepository, townName)) {
             System.out.print(TOWN_DOES_NOT_EXIST);
-            if (!wantToAdd()){
+            if (!wantToAdd()) {
                 return NO_ANSWER;
             }
         } else {
@@ -73,9 +74,9 @@ public class TownServiceImpl implements TownService {
 
         String addCountryResult = countryService.addCountry(countryName);
 
-        if (addCountryResult.equals(SUCCESSFULLY_ADDED_COUNTRY)){
+        if (addCountryResult.equals(SUCCESSFULLY_ADDED_COUNTRY)) {
             System.out.println(addCountryResult);
-        } else if (addCountryResult.equals(NO_ANSWER)){
+        } else if (addCountryResult.equals(NO_ANSWER)) {
             return NO_ANSWER;
         }
 

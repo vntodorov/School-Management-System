@@ -2,8 +2,11 @@ package SchoolManagementSystem.services.seed;
 
 import SchoolManagementSystem.domain.DTOs.AddCountryDTO;
 import SchoolManagementSystem.domain.DTOs.AddTownDTO;
+import SchoolManagementSystem.domain.DTOs.DepartmentDTO;
 import SchoolManagementSystem.domain.entities.Country;
+import SchoolManagementSystem.domain.entities.Department;
 import SchoolManagementSystem.domain.entities.Town;
+import SchoolManagementSystem.services.interfaces.DepartmentService;
 import SchoolManagementSystem.services.interfaces.CountryService;
 import SchoolManagementSystem.services.interfaces.TownService;
 import com.google.gson.Gson;
@@ -12,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,16 +32,20 @@ public class BaseSeedServiceImpl implements BaseSeedService {
 
     private final ModelMapper mapper;
 
-    private final TownService townService;
-
     private final CountryService countryService;
 
+    private final TownService townService;
+
+    private final DepartmentService departmentService;
+
+
     @Autowired
-    public BaseSeedServiceImpl(Gson gson, ModelMapper mapper, TownService townService, CountryService countryService) {
+    public BaseSeedServiceImpl(Gson gson, ModelMapper mapper, TownService townService, CountryService countryService, DepartmentService departmentService) {
         this.gson = gson;
         this.mapper = mapper;
         this.townService = townService;
         this.countryService = countryService;
+        this.departmentService = departmentService;
     }
 
     @Override
@@ -73,9 +80,26 @@ public class BaseSeedServiceImpl implements BaseSeedService {
     }
 
     @Override
+    public void seedBaseDepartments() throws FileNotFoundException {
+        if (!departmentService.isDataSeeded()){
+
+            FileReader departmentJsonReader = new FileReader(DEPARTMENT_JSON_PATH.toFile());
+
+            List<Department> departments = Arrays.stream(gson.fromJson(departmentJsonReader, DepartmentDTO[].class))
+                    .map(d -> mapper.map(d, Department.class))
+                    .toList();
+
+            departmentService.seedDepartments(departments);
+
+
+        }
+    }
+
+    @Override
     @Transactional
     public void seedAllBaseData() throws IOException {
         seedBaseCountries();
         seedBaseTowns();
+        seedBaseDepartments();
     }
 }
