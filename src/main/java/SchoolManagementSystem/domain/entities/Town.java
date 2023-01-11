@@ -9,7 +9,7 @@ public class Town extends BaseEntityWithIdLong{
     @Column
     private String name;
 
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "country_id")
     private Country country;
 

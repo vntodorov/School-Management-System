@@ -58,9 +58,15 @@ public class TownServiceImpl implements TownService {
     @Transactional
     public String addTown(String townName) {
 
-        if (townRepository.existsByName(townName)) {
+        if (!checkTown(townRepository, townName)){
+            System.out.print(TOWN_DOES_NOT_EXIST);
+            if (!wantToAdd()){
+                return NO_ANSWER;
+            }
+        } else {
             return TOWN_ALREADY_EXISTS;
         }
+
 
         System.out.print(COUNTRY_NAME);
         String countryName = new Scanner(System.in).nextLine();
@@ -69,6 +75,8 @@ public class TownServiceImpl implements TownService {
 
         if (addCountryResult.equals(SUCCESSFULLY_ADDED_COUNTRY)){
             System.out.println(addCountryResult);
+        } else if (addCountryResult.equals(NO_ANSWER)){
+            return NO_ANSWER;
         }
 
         Country country = countryRepository.findByName(countryName).orElseThrow();

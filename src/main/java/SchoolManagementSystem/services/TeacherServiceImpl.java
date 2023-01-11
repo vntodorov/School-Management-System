@@ -1,7 +1,10 @@
 package SchoolManagementSystem.services;
 
 import SchoolManagementSystem.domain.DTOs.AddTeacherDTO;
+import SchoolManagementSystem.domain.DTOs.StudentBasicInfoDTO;
 import SchoolManagementSystem.domain.DTOs.SubjectDTO;
+import SchoolManagementSystem.domain.DTOs.TeacherBasicInfoDTO;
+import SchoolManagementSystem.domain.entities.Student;
 import SchoolManagementSystem.domain.entities.Teacher;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static SchoolManagementSystem.constants.Validations.*;
 
@@ -63,21 +67,19 @@ public class TeacherServiceImpl implements TeacherService {
 
         AddTeacherDTO teacherDTO;
 
-        if (!checkTown(townRepository, countryRepository, townName)){
+        String resultOfAddingTown = townService.addTown(townName);
 
-            if (wantToAdd()){
-                System.out.println(townService.addTown(townName));
-            } else {
-                return NO_ANSWER;
-            }
-
+        if (resultOfAddingTown.equals(NO_ANSWER)) {
+            return NO_ANSWER;
+        } else if (resultOfAddingTown.equals(SUCCESSFULLY_ADDED_TOWN)) {
+            System.out.println(resultOfAddingTown);
         }
 
         Town town = townRepository.findByName(townName).orElseThrow();
 
         try {
             teacherDTO = new AddTeacherDTO(firstName, middleName, lastName, EGN, age, gender, town, email, subjectToAdd);
-        } catch (EntityException e){
+        } catch (EntityException e) {
             return e.getMessage();
         }
 
@@ -86,5 +88,22 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.save(teacher);
 
         return String.format(SUCCESSFULLY_ADDED_TEACHER, teacher);
+    }
+
+    @Override
+    public String viewTeacherInfo(String[] viewTeacherData) {
+        String firstName = viewTeacherData[0];
+        String lastName = viewTeacherData[1];
+
+        Optional<Teacher> teacher = this.teacherRepository.findByFirstNameAndLastName(firstName, lastName);
+
+        if (teacher.isEmpty()) {
+            return String.format(TEACHER_DOES_NOT_EXIST, firstName, lastName);
+        }
+
+        TeacherBasicInfoDTO teacherToShow = this.modelMapper.map(teacher, TeacherBasicInfoDTO.class);
+
+        return teacherToShow.toString();
+
     }
 }

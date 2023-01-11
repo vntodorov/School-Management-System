@@ -53,10 +53,11 @@ public class ConsoleRunner implements CommandLineRunner {
         while (!"End".equals(input)) {
 
             String result = switch (input) {
-                case ADD_STUDENT_COMMAND -> studentService.addStudent(requestStudentInformation());
-                case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestTeacherInformation());
-                case ADD_COUNTRY -> countryService.addCountry(requestCountryInformation());
-                case ADD_TOWN -> townService.addTown(requestTownInformation());
+                case ADD_STUDENT_COMMAND -> studentService.addStudent(requestAddStudentInformation());
+                case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestAddTeacherInformation());
+                case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewInformation());
+                case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewInformation());
+
                 default -> "No such command!";
             };
 
@@ -65,20 +66,22 @@ public class ConsoleRunner implements CommandLineRunner {
         }
     }
 
-    private String requestTownInformation() {
-        System.out.println(ADD_TOWN_BEGIN);
+    private String[] requestViewInformation() {
+        System.out.print(PERSON_FIRST_NAME);
+        String firstName = scanner.nextLine();
 
-        System.out.print(TOWN_NAME);
+        System.out.print(PERSON_LAST_NAME);
+        String lastName = scanner.nextLine();
 
-        return scanner.nextLine();
+        return new String[]{firstName, lastName};
     }
 
-    private List<String> requestStudentInformation() {
+    private List<String> requestAddStudentInformation() {
         System.out.println(ADD_STUDENT_BEGIN);
         return requestPersonInformation();
     }
 
-    private List<String> requestTeacherInformation() {
+    private List<String> requestAddTeacherInformation() {
         System.out.println(ADD_TEACHER_BEGIN);
         List<String> teacherData = new ArrayList<>(requestPersonInformation());
 
@@ -89,14 +92,6 @@ public class ConsoleRunner implements CommandLineRunner {
         return teacherData;
 
 
-    }
-
-    private String requestCountryInformation() {
-        System.out.println(ADD_COUNTRY_BEGIN);
-
-        System.out.print(COUNTRY_NAME);
-
-        return scanner.nextLine();
     }
 
     private List<String> requestPersonInformation() {

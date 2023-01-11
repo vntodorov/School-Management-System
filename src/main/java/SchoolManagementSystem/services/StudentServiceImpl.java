@@ -3,6 +3,7 @@ package SchoolManagementSystem.services;
 import static SchoolManagementSystem.constants.Validations.*;
 
 import SchoolManagementSystem.domain.DTOs.AddStudentDTO;
+import SchoolManagementSystem.domain.DTOs.StudentBasicInfoDTO;
 import SchoolManagementSystem.domain.entities.Student;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -57,21 +59,19 @@ public class StudentServiceImpl implements StudentService {
 
         AddStudentDTO studentDTO;
 
-        if (!checkTown(townRepository, countryRepository, townName)){
+        String resultOfAddingTown = townService.addTown(townName);
 
-            if (wantToAdd()){
-                System.out.println(townService.addTown(townName));
-            } else {
-                return NO_ANSWER;
-            }
-
+        if (resultOfAddingTown.equals(NO_ANSWER)) {
+            return NO_ANSWER;
+        } else if (resultOfAddingTown.equals(SUCCESSFULLY_ADDED_TOWN)) {
+            System.out.println(resultOfAddingTown);
         }
 
         Town town = townRepository.findByName(townName).orElseThrow();
 
         try {
             studentDTO = new AddStudentDTO(firstName, middleName, lastName, EGN, age, gender, town, email);
-        } catch (EntityException e){
+        } catch (EntityException e) {
             return e.getMessage();
         }
 
@@ -80,5 +80,21 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
 
         return String.format(SUCCESSFULLY_ADDED_STUDENT, student);
+    }
+
+    @Override
+    public String viewStudentInfo(String[] viewStudentData) {
+        String firstName = viewStudentData[0];
+        String lastName = viewStudentData[1];
+
+        Optional<Student> student = this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
+
+        if (student.isEmpty()) {
+            return String.format(STUDENT_DOES_NOT_EXIST, firstName, lastName);
+        }
+
+        StudentBasicInfoDTO studentToShow = this.modelMapper.map(student, StudentBasicInfoDTO.class);
+
+        return studentToShow.toString();
     }
 }

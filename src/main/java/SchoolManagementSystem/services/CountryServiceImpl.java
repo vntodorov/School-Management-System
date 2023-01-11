@@ -48,7 +48,12 @@ public class CountryServiceImpl implements CountryService {
     @Transactional
     public String addCountry(String countryName) {
 
-        if (countryRepository.existsByName(countryName)){
+        if (!checkCountry(countryRepository, countryName)){
+            System.out.print(COUNTRY_DOES_NOT_EXIST);
+            if (!wantToAdd()){
+                return NO_ANSWER;
+            }
+        } else {
             return COUNTRY_ALREADY_EXISTS;
         }
 

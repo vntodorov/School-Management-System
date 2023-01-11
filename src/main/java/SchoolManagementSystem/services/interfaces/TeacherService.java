@@ -6,4 +6,5 @@ public interface TeacherService {
 
     String addTeacher(List<String> teacherData);
 
+    String viewTeacherInfo(String[] viewTeacherData);
 }
