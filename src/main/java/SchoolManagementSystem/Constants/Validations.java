@@ -14,6 +14,7 @@ public abstract class Validations {
     public static final String SUCCESSFULLY_ADDED_STUDENT = "You have successfully added a new student in the database! Here are all the details:%n%s";
     public static final String SUCCESSFULLY_ADDED_TEACHER = "You have successfully added a new teacher in the database! Here are all the details:%n%s";
     public static final String SUCCESSFULLY_ADDED_EMPLOYEE = "You have successfully added a new employee in the database! Here are all the details:%n%s";
+    public static final String SUCCESSFULLY_ADDED_CLUB = "You have successfully added a new club in the database! Here are all the details:%n%s";
     public static final String SUCCESSFULLY_ADDED_COUNTRY = "You have successfully added a new country in the database!";
     public static final String SUCCESSFULLY_ADDED_TOWN = "You have successfully added a new town in the database!";
 
@@ -26,6 +27,7 @@ public abstract class Validations {
     public static final String STUDENT_DOES_NOT_EXIST = "Student with first name %s and last name %s doesn't exist.";
     public static final String TEACHER_DOES_NOT_EXIST = "Teacher with first name %s and last name %s doesn't exist.";
     public static final String EMPLOYEE_DOES_NOT_EXIST = "Employee with first name %s and last name %s doesn't exist.";
+    public static final String CLUB_DOES_NOT_EXIST = "Club with the name %s doesn't exist.";
 
 
     public static final String COUNTRY_DOES_NOT_EXIST = "This country doesn't exist. Do you want to add it in the database? [YES or NO]: ";
@@ -44,7 +46,7 @@ public abstract class Validations {
         return countryRepository.existsByName(countryName);
     }
 
-    public static boolean checkDepartment(DepartmentRepository departmentRepository, String departmentName){
+    public static boolean checkDepartment(DepartmentRepository departmentRepository, String departmentName) {
         return departmentRepository.existsByName(departmentName);
     }
 

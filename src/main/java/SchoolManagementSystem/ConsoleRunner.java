@@ -56,9 +56,11 @@ public class ConsoleRunner implements CommandLineRunner {
                 case ADD_STUDENT_COMMAND -> studentService.addStudent(requestAddStudentInformation());
                 case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestAddTeacherInformation());
                 case ADD_EMPLOYEE_COMMAND -> employeeService.addEmployee(requestAddEmployeeInformation());
-                case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewInformation());
-                case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewInformation());
-                case VIEW_EMPLOYEE_INFO -> employeeService.viewEmployeeInfo(requestViewInformation());
+                case ADD_CLUB_COMMAND -> clubService.addClub(requestClubInformation());
+                case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewPersonInformation());
+                case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewPersonInformation());
+                case VIEW_EMPLOYEE_INFO -> employeeService.viewEmployeeInfo(requestViewPersonInformation());
+                case VIEW_CLUB_INFO -> clubService.viewClubInformation(requestViewClubInformation());
 
                 default -> "No such command!";
             };
@@ -68,7 +70,23 @@ public class ConsoleRunner implements CommandLineRunner {
         }
     }
 
-    private String[] requestViewInformation() {
+    private String requestViewClubInformation() {
+        System.out.print(CLUB_NAME);
+        return scanner.nextLine();
+    }
+
+    private String[] requestClubInformation() {
+        System.out.println(ADD_CLUB_BEGIN);
+
+        System.out.print(CLUB_NAME);
+        String clubName = scanner.nextLine();
+
+        System.out.print(CLUB_DESCRIPTION);
+        String clubDescription = scanner.nextLine();
+        return new String[]{clubName, clubDescription};
+    }
+
+    private String[] requestViewPersonInformation() {
         System.out.print(PERSON_FIRST_NAME);
         String firstName = scanner.nextLine();
 
@@ -114,7 +132,6 @@ public class ConsoleRunner implements CommandLineRunner {
 
         return employeeData;
     }
-
 
 
     private List<String> requestPersonInformation() {

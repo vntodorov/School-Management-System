@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "departments")
 public class Department extends BaseEntityWithIdLong {
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "department")

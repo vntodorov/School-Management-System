@@ -14,20 +14,20 @@ import java.util.Set;
 @Table(name = "clubs")
 public class Club extends BaseEntityWithIdLong {
 
-    @Column
+    @Column(unique = true)
     private String name;
 
-    @Column(length = 500)
+    @Column(length = 500, columnDefinition = "text")
     private String description;
 
     @ManyToMany(mappedBy = "clubs")
     private Set<Student> students;
 
-    private Club(){
+    private Club() {
         this.students = new HashSet<>();
     }
 
-    public Club(String name, String description){
+    public Club(String name, String description) {
         this();
         setName(name);
         setDescription(description);
@@ -41,11 +41,11 @@ public class Club extends BaseEntityWithIdLong {
         this.description = description;
     }
 
-    public void addStudentToClub(Student student){
+    public void addStudentToClub(Student student) {
         students.add(student);
     }
 
-    public void removeStudentFromClub(Student student){
+    public void removeStudentFromClub(Student student) {
         students.remove(student);
     }
 
@@ -61,4 +61,9 @@ public class Club extends BaseEntityWithIdLong {
         return Collections.unmodifiableSet(students);
     }
 
+    @Override
+    public String toString() {
+        return "Club's name: " + name + System.lineSeparator()
+                + "Club's description: " + description;
+    }
 }
