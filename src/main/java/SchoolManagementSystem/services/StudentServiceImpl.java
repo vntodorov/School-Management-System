@@ -4,13 +4,14 @@ import static SchoolManagementSystem.constants.Validations.*;
 
 import SchoolManagementSystem.domain.DTOs.AddStudentDTO;
 import SchoolManagementSystem.domain.DTOs.StudentBasicInfoDTO;
+import SchoolManagementSystem.domain.entities.Club;
 import SchoolManagementSystem.domain.entities.Student;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
+import SchoolManagementSystem.domain.enums.Mark;
 import SchoolManagementSystem.exceptions.EntityException;
-import SchoolManagementSystem.repositories.CountryRepository;
 import SchoolManagementSystem.repositories.StudentRepository;
-import SchoolManagementSystem.repositories.TownRepository;
+import SchoolManagementSystem.services.interfaces.ClubService;
 import SchoolManagementSystem.services.interfaces.StudentService;
 import SchoolManagementSystem.services.interfaces.TownService;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,21 +28,18 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    private final TownRepository townRepository;
-
     private final TownService townService;
+
+    private final ClubService clubService;
 
     private final ModelMapper modelMapper;
 
-    private final CountryRepository countryRepository;
-
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, TownRepository townRepository, TownService townService, ModelMapper modelMapper, CountryRepository countryRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, TownService townService, ClubService clubService, ModelMapper modelMapper) {
         this.studentRepository = studentRepository;
-        this.townRepository = townRepository;
         this.townService = townService;
+        this.clubService = clubService;
         this.modelMapper = modelMapper;
-        this.countryRepository = countryRepository;
     }
 
 
@@ -67,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
             System.out.println(resultOfAddingTown);
         }
 
-        Town town = townRepository.findByName(townName).orElseThrow();
+        Town town = townService.findByName(townName);
 
         try {
             studentDTO = new AddStudentDTO(firstName, middleName, lastName, EGN, age, gender, town, email);
@@ -96,5 +95,48 @@ public class StudentServiceImpl implements StudentService {
         StudentBasicInfoDTO studentToShow = this.modelMapper.map(student, StudentBasicInfoDTO.class);
 
         return studentToShow.toString();
+    }
+
+    @Override
+    @Transactional
+    public String addMark(String[] studentMarkData) {
+        String firstName = studentMarkData[0];
+        String lastName = studentMarkData[1];
+        int markValue = Integer.parseInt(studentMarkData[2]);
+
+        Mark markToAdd = Arrays.stream(Mark.values()).filter(m -> m.getValue() == markValue).findFirst().orElseThrow();
+
+        Optional<Student> student = this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
+
+        if (student.isEmpty()) {
+            return String.format(STUDENT_DOES_NOT_EXIST, firstName, lastName);
+        }
+
+        student.get().addMark(markToAdd);
+        studentRepository.save(student.get());
+
+        return String.format(SUCCESSFULLY_ADDED_MARK_TO_STUDENT, markValue, firstName, lastName);
+
+    }
+
+    @Override
+    @Transactional
+    public String addClub(String[] studentClubData) {
+        String firstName = studentClubData[0];
+        String lastName = studentClubData[1];
+        String clubName = studentClubData[2];
+
+        Club club = clubService.findByName(clubName);
+
+        Optional<Student> student = this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
+
+        if (student.isEmpty()) {
+            return String.format(STUDENT_DOES_NOT_EXIST, firstName, lastName);
+        }
+
+        student.get().addClub(club);
+        studentRepository.save(student.get());
+
+        return String.format(SUCCESSFULLY_ADDED_CLUB_TO_STUDENT, clubName, firstName, lastName);
     }
 }

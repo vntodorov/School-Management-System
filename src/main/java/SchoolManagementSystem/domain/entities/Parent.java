@@ -2,10 +2,7 @@ package SchoolManagementSystem.domain.entities;
 
 import SchoolManagementSystem.domain.entities.base.BasePersonEntity;
 import SchoolManagementSystem.domain.enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,7 +15,7 @@ public class Parent extends BasePersonEntity {
     @Column
     private int phoneNumber;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     Set<Student> students;
 
     private Parent(){}

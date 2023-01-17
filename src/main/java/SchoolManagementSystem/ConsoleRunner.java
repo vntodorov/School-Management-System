@@ -57,6 +57,8 @@ public class ConsoleRunner implements CommandLineRunner {
                 case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestAddTeacherInformation());
                 case ADD_EMPLOYEE_COMMAND -> employeeService.addEmployee(requestAddEmployeeInformation());
                 case ADD_CLUB_COMMAND -> clubService.addClub(requestClubInformation());
+                case ADD_MARK_TO_STUDENT_COMMAND -> studentService.addMark(requestAddMarkToStudentInformation());
+                case ADD_CLUB_TO_STUDENT_COMMAND -> studentService.addClub(requestAddClubToStudentInformation());
                 case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewPersonInformation());
                 case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewPersonInformation());
                 case VIEW_EMPLOYEE_INFO -> employeeService.viewEmployeeInfo(requestViewPersonInformation());
@@ -68,6 +70,37 @@ public class ConsoleRunner implements CommandLineRunner {
             System.out.println(result);
             input = scanner.nextLine();
         }
+    }
+
+    private String[] requestAddMarkToStudentInformation() {
+        System.out.println(ADD_MARK_TO_STUDENT_BEGIN);
+
+        System.out.print(STUDENT_FIRST_NAME);
+        String firstName = scanner.nextLine();
+
+        System.out.print(STUDENT_LAST_NAME);
+        String lastName = scanner.nextLine();
+
+        System.out.print(MARK);
+        String mark = scanner.nextLine();
+
+        return new String[]{firstName, lastName, mark};
+
+    }
+
+    private String[] requestAddClubToStudentInformation() {
+        System.out.println(ADD_CLUB_TO_STUDENT_BEGIN);
+
+        System.out.print(STUDENT_FIRST_NAME);
+        String firstName = scanner.nextLine();
+
+        System.out.print(STUDENT_LAST_NAME);
+        String lastName = scanner.nextLine();
+
+        System.out.print(CLUB_NAME);
+        String clubName = scanner.nextLine();
+
+        return new String[]{firstName, lastName, clubName};
     }
 
     private String requestViewClubInformation() {

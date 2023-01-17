@@ -9,4 +9,6 @@ public enum EntityExceptionMessages {
     public static final String COUNTRY_EXCEPTION = "Country with the name %s does not exist!";
     public static final String DEPARTMENT_EXCEPTION = "Department with the name %s does not exist!";
     public static final String TOWN_EXCEPTION = "Town with the name %s does not exist!";
+    public static final String CLUB_EXCEPTION = "Club with the name %s does not exist!";
+
 }

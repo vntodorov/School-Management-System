@@ -19,6 +19,10 @@ public abstract class Validations {
     public static final String SUCCESSFULLY_ADDED_TOWN = "You have successfully added a new town in the database!";
 
 
+    public static final String SUCCESSFULLY_ADDED_MARK_TO_STUDENT = "You have successfully added mark %d to student %s %s!";
+    public static final String SUCCESSFULLY_ADDED_CLUB_TO_STUDENT = "You have successfully added club %s to student %s %s!";
+
+
     public static final String SUCCESSFULLY_VIEW_STUDENT = "You have successfully requested a view to a student! Here are all the details:%n%s";
     public static final String SUCCESSFULLY_VIEW_TEACHER = "You have successfully requested a view to a teacher! Here are all the details:%n%s";
     public static final String SUCCESSFULLY_VIEW_EMPLOYEE = "You have successfully requested a view to an employee! Here are all the details:%n%s";

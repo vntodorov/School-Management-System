@@ -2,6 +2,7 @@ package SchoolManagementSystem.services;
 
 import SchoolManagementSystem.domain.DTOs.ClubDTO;
 import SchoolManagementSystem.domain.entities.Club;
+import SchoolManagementSystem.exceptions.EntityException;
 import SchoolManagementSystem.repositories.ClubRepository;
 import SchoolManagementSystem.services.interfaces.ClubService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static SchoolManagementSystem.constants.EntityExceptionMessages.CLUB_EXCEPTION;
+import static SchoolManagementSystem.constants.EntityExceptionMessages.TOWN_EXCEPTION;
 import static SchoolManagementSystem.constants.Validations.*;
 
 @Service
@@ -50,5 +53,10 @@ public class ClubServiceImpl implements ClubService {
         ClubDTO clubToShow = mapper.map(club, ClubDTO.class);
 
         return clubToShow.toString();
+    }
+
+    @Override
+    public Club findByName(String clubName) {
+        return clubRepository.findByName(clubName).orElseThrow(() -> new EntityException(String.format(CLUB_EXCEPTION, clubName)));
     }
 }

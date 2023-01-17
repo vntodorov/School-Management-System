@@ -15,14 +15,14 @@ public class Student extends BasePersonEntity {
     @ManyToOne
     private Parent parent;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "students_clubs",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "club_id", referencedColumnName = "id")
     )
     private Set<Club> clubs;
 
-    @ElementCollection(targetClass = Mark.class)
+    @ElementCollection(targetClass = Mark.class, fetch = FetchType.LAZY)
     @JoinTable(name = "students_marks", joinColumns = @JoinColumn(name = "student_id"))
     @Column(name = "mark", nullable = false)
     @Enumerated(EnumType.ORDINAL)
@@ -57,5 +57,11 @@ public class Student extends BasePersonEntity {
         this.enrollDate = enrollDate;
     }
 
+    public void addMark(Mark mark){
+        marks.add(mark);
+    }
 
+    public void addClub(Club club) {
+        clubs.add(club);
+    }
 }

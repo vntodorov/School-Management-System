@@ -9,4 +9,8 @@ public interface StudentService {
 
 
     String viewStudentInfo(String[] viewStudentData);
+
+    String addMark(String[] studentMarkData);
+
+    String addClub(String[] studentClubData);
 }
