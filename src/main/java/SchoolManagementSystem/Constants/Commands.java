@@ -9,6 +9,7 @@ public enum Commands {
 
     public static final String ADD_MARK_TO_STUDENT_COMMAND = "AddMarkToStudent";
     public static final String ADD_CLUB_TO_STUDENT_COMMAND = "AddClubToStudent";
+    public static final String ADD_PARENT_TO_STUDENT_COMMAND = "AddParentToStudent";
 
     public static final String VIEW_STUDENT_INFO = "ViewStudent";
     public static final String VIEW_TEACHER_INFO = "ViewTeacher";

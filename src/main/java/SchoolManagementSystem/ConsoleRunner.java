@@ -28,19 +28,16 @@ public class ConsoleRunner implements CommandLineRunner {
 
     private final ClubService clubService;
 
-    private final TownService townService;
-
-    private final CountryService countryService;
+    private final ParentService parentService;
 
     @Autowired
-    public ConsoleRunner(BaseSeedService baseSeedService, StudentService studentService, TeacherService teacherService, EmployeeService employeeService, ClubService clubService, TownService townService, CountryService countryService) {
+    public ConsoleRunner(BaseSeedService baseSeedService, StudentService studentService, TeacherService teacherService, EmployeeService employeeService, ClubService clubService, ParentService parentService) {
         this.baseSeedService = baseSeedService;
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.employeeService = employeeService;
         this.clubService = clubService;
-        this.townService = townService;
-        this.countryService = countryService;
+        this.parentService = parentService;
     }
 
 
@@ -53,12 +50,14 @@ public class ConsoleRunner implements CommandLineRunner {
         while (!"End".equals(input)) {
 
             String result = switch (input) {
+
                 case ADD_STUDENT_COMMAND -> studentService.addStudent(requestAddStudentInformation());
                 case ADD_TEACHER_COMMAND -> teacherService.addTeacher(requestAddTeacherInformation());
                 case ADD_EMPLOYEE_COMMAND -> employeeService.addEmployee(requestAddEmployeeInformation());
                 case ADD_CLUB_COMMAND -> clubService.addClub(requestClubInformation());
                 case ADD_MARK_TO_STUDENT_COMMAND -> studentService.addMark(requestAddMarkToStudentInformation());
                 case ADD_CLUB_TO_STUDENT_COMMAND -> studentService.addClub(requestAddClubToStudentInformation());
+                case ADD_PARENT_TO_STUDENT_COMMAND -> studentService.addParent(requestAddParentToStudentInformation());
                 case VIEW_STUDENT_INFO -> studentService.viewStudentInfo(requestViewPersonInformation());
                 case VIEW_TEACHER_INFO -> teacherService.viewTeacherInfo(requestViewPersonInformation());
                 case VIEW_EMPLOYEE_INFO -> employeeService.viewEmployeeInfo(requestViewPersonInformation());
@@ -72,19 +71,41 @@ public class ConsoleRunner implements CommandLineRunner {
         }
     }
 
+    private List<String> requestAddParentToStudentInformation() {
+        System.out.println(ADD_PARENT_TO_STUDENT_BEGIN);
+        List<String> studentParent = new ArrayList<>(requestPersonInformation());
+
+        System.out.print(PARENT_PHONE_NUMBER);
+        String phoneNumber = scanner.nextLine();
+        studentParent.add(phoneNumber);
+
+        System.out.println(REQUEST_STUDENT_INFO_AFTER);
+
+        System.out.print(STUDENT_FIRST_NAME);
+        String studentFirstName = scanner.nextLine();
+
+        System.out.print(STUDENT_LAST_NAME);
+        String studentLastName = scanner.nextLine();
+
+        studentParent.add(studentFirstName);
+        studentParent.add(studentLastName);
+
+        return studentParent;
+    }
+
     private String[] requestAddMarkToStudentInformation() {
         System.out.println(ADD_MARK_TO_STUDENT_BEGIN);
 
         System.out.print(STUDENT_FIRST_NAME);
-        String firstName = scanner.nextLine();
+        String studentFirstName = scanner.nextLine();
 
         System.out.print(STUDENT_LAST_NAME);
-        String lastName = scanner.nextLine();
+        String studentLastName = scanner.nextLine();
 
         System.out.print(MARK);
         String mark = scanner.nextLine();
 
-        return new String[]{firstName, lastName, mark};
+        return new String[]{studentFirstName, studentLastName, mark};
 
     }
 

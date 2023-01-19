@@ -13,4 +13,6 @@ public interface StudentService {
     String addMark(String[] studentMarkData);
 
     String addClub(String[] studentClubData);
+
+    String addParent(List<String> studentParentData);
 }

@@ -5,6 +5,7 @@ import static SchoolManagementSystem.constants.Validations.*;
 import SchoolManagementSystem.domain.DTOs.AddStudentDTO;
 import SchoolManagementSystem.domain.DTOs.StudentBasicInfoDTO;
 import SchoolManagementSystem.domain.entities.Club;
+import SchoolManagementSystem.domain.entities.Parent;
 import SchoolManagementSystem.domain.entities.Student;
 import SchoolManagementSystem.domain.entities.Town;
 import SchoolManagementSystem.domain.enums.Gender;
@@ -12,6 +13,7 @@ import SchoolManagementSystem.domain.enums.Mark;
 import SchoolManagementSystem.exceptions.EntityException;
 import SchoolManagementSystem.repositories.StudentRepository;
 import SchoolManagementSystem.services.interfaces.ClubService;
+import SchoolManagementSystem.services.interfaces.ParentService;
 import SchoolManagementSystem.services.interfaces.StudentService;
 import SchoolManagementSystem.services.interfaces.TownService;
 import org.modelmapper.ModelMapper;
@@ -31,14 +33,16 @@ public class StudentServiceImpl implements StudentService {
     private final TownService townService;
 
     private final ClubService clubService;
+    private final ParentService parentService;
 
     private final ModelMapper modelMapper;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, TownService townService, ClubService clubService, ModelMapper modelMapper) {
+    public StudentServiceImpl(StudentRepository studentRepository, TownService townService, ClubService clubService, ParentService parentService, ModelMapper modelMapper) {
         this.studentRepository = studentRepository;
         this.townService = townService;
         this.clubService = clubService;
+        this.parentService = parentService;
         this.modelMapper = modelMapper;
     }
 
@@ -138,5 +142,33 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student.get());
 
         return String.format(SUCCESSFULLY_ADDED_CLUB_TO_STUDENT, clubName, firstName, lastName);
+    }
+
+    @Override
+    @Transactional
+    public String addParent(List<String> studentParentData) {
+        parentService.addParent(studentParentData);
+
+        String parentFirstName = studentParentData.get(0);
+        String parentLastName = studentParentData.get(2);
+
+        String studentFirstName = studentParentData.get(9);
+        String studentLastName = studentParentData.get(10);
+
+        Optional<Student> student = this.studentRepository.findByFirstNameAndLastName(studentFirstName, studentLastName);
+
+        if (student.isEmpty()) {
+            return String.format(STUDENT_DOES_NOT_EXIST, studentFirstName, studentLastName);
+        }
+
+        Parent parent = parentService.findByFirstNameAndLastName(parentFirstName, parentLastName);
+
+        student.get().setParent(parent);
+
+        studentRepository.save(student.get());
+
+        return String.format(SUCCESSFULLY_ADDED_PARENT_TO_STUDENT, studentFirstName, studentLastName);
+
+
     }
 }

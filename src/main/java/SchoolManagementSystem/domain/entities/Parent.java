@@ -13,24 +13,24 @@ import java.util.Set;
 public class Parent extends BasePersonEntity {
 
     @Column
-    private int phoneNumber;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     Set<Student> students;
 
     private Parent(){}
 
-    public Parent(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email, int phoneNumber) {
+    public Parent(String firstName, String middleName, String lastName, String EGN, int age, Gender gender, Town town, String email, String phoneNumber) {
         super(firstName, middleName, lastName, EGN, age, gender, town, email);
         setPhoneNumber(phoneNumber);
         this.students = new HashSet<>();
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
