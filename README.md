@@ -24,12 +24,14 @@ A basic managment system for a virtual school - you can build, organize and cont
 <img src="https://user-images.githubusercontent.com/107515077/210184269-2e1962ae-5e83-4021-88ba-f7430f460e72.png" width="25" height="29" > <b>Towns/Countries</b>: The app might be just for school managment but it is just as important to know where our students, teachers and employees live. The software is covering only <i>Bulgaria</i> and its biggest cities - they are in the DB from the start!<br>
   
 ## ⚙ Built Using
-* [Java core](https://www.java.com/en)
+* [Java](https://www.java.com/en)
 * [SQL (MySQL)](https://mysql.com)
 * [IntelliJ Idea](https://www.jetbrains.com/idea)
 ---
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Spring Data](https://spring.io/projects/spring-data)
+* [Spring Web - REST API](https://spring.io/projects/spring-data-rest)
+* [Spring Security](https://spring.io/projects/spring-security)
 * [Apache Maven](https://maven.apache.org)
 * [Hibernate](https://hibernate.org)
 * [MySQL Connector](https://www.mysql.com/products/connector)
