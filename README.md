@@ -32,6 +32,7 @@ A basic managment system for a virtual school - you can build, organize and cont
 * [Spring Data](https://spring.io/projects/spring-data)
 * [Spring Web - REST API](https://spring.io/projects/spring-data-rest)
 * [Spring Security](https://spring.io/projects/spring-security)
+* [Spring Validation](https://www.baeldung.com/spring-boot-bean-validation)
 * [Apache Maven](https://maven.apache.org)
 * [Hibernate](https://hibernate.org)
 * [MySQL Connector](https://www.mysql.com/products/connector)
