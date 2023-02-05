@@ -25,7 +25,7 @@ public class Student extends BasePersonEntity {
     @ElementCollection(targetClass = Mark.class, fetch = FetchType.LAZY)
     @JoinTable(name = "students_marks", joinColumns = @JoinColumn(name = "student_id"))
     @Column(name = "mark", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private List<Mark> marks;
 
     @Column(name = "enroll_date", nullable = false)

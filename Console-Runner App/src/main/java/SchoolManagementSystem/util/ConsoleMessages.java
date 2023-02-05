@@ -14,8 +14,8 @@ public enum ConsoleMessages {
             "9 - View information for a Teacher.\n" +
             "10 - View information for an Employee.\n" +
             "11 - View information for a Club.\n" +
-            "0 - End the program.\n" +
-            "Type the number of the wanted command: ";
+            "0 - End the program.";
+    public static final String TYPE_NUMBER = "Type the number of the wanted command: ";
 
 
     public static final String ADD_STUDENT_BEGIN = "It's time to add a new student in the school. Please fill up the requested information below:";

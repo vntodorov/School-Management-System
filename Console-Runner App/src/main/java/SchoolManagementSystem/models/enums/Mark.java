@@ -13,6 +13,7 @@ public enum Mark {
         this.value = value;
     }
 
+
     public int getValue() {
         return value;
     }

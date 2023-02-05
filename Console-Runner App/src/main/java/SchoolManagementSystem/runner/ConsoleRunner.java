@@ -42,7 +42,8 @@ public class ConsoleRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         baseSeedService.seedAllBaseData();
 
-        System.out.print(INSTRUCTION_START_MESSAGE);
+        System.out.println(INSTRUCTION_START_MESSAGE);
+        System.out.print(TYPE_NUMBER);
 
         int input = Integer.parseInt(scanner.nextLine());
 
@@ -66,6 +67,7 @@ public class ConsoleRunner implements CommandLineRunner {
             };
 
             System.out.println(result);
+            System.out.print(TYPE_NUMBER);
             input = Integer.parseInt(scanner.nextLine());
         }
     }
