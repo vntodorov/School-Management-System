@@ -3,6 +3,7 @@ package com.iStudent.web;
 import com.iStudent.model.DTOs.AddStudentDTO;
 import com.iStudent.model.DTOs.StudentDTO;
 import com.iStudent.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<AddStudentDTO> addStudent(@RequestBody AddStudentDTO addStudentDTO,
+    public ResponseEntity<AddStudentDTO> addStudent(@Valid @RequestBody AddStudentDTO addStudentDTO,
                                                     UriComponentsBuilder uriComponentsBuilder) {
 
         long newStudentId = studentService.addStudent();
