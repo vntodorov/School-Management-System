@@ -49,7 +49,7 @@ A basic managment system for a virtual school - you can build, organize and cont
 <p align="center">
 <b>Actively in development!</b>
 
-<b><i> Note: FULL documentation of how to <b>iStudent</b> and details about all previous versions can be found in "DOCUMENTATION" file!</b></i>
+<b><i> Note: FULL documentation of how to use <b>iStudent</b> and details about all previous versions can be found in "DOCUMENTATION" file!</b></i>
 <p>
   
 ## 👨‍💻 Author
