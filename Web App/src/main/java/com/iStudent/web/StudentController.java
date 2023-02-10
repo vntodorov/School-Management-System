@@ -49,7 +49,7 @@ public class StudentController {
     public ResponseEntity<AddStudentDTO> addStudent(@Valid @RequestBody AddStudentDTO addStudentDTO,
                                                     UriComponentsBuilder uriComponentsBuilder) {
 
-        long newStudentId = studentService.addStudent();
+        long newStudentId = studentService.addStudent(addStudentDTO);
 
         return ResponseEntity
                 .created(uriComponentsBuilder.path("/{id}")
