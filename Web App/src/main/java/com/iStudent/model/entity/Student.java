@@ -2,7 +2,7 @@ package com.iStudent.model.entity;
 
 import com.iStudent.model.entity.base.BasePersonEntity;
 import com.iStudent.model.entity.enums.Mark;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.util.*;

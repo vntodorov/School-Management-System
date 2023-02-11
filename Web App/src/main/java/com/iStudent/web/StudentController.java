@@ -1,14 +1,13 @@
 package com.iStudent.web;
 
-import com.iStudent.model.DTOs.AddStudentDTO;
 import com.iStudent.model.DTOs.StudentDTO;
 import com.iStudent.service.StudentService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,19 +44,19 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<AddStudentDTO> addStudent(@Valid @RequestBody AddStudentDTO addStudentDTO,
+    @PostMapping
+    public ResponseEntity<StudentDTO> addStudent(@Valid @RequestBody StudentDTO studentDTO,
                                                     UriComponentsBuilder uriComponentsBuilder) {
 
-        long newStudentId = studentService.addStudent(addStudentDTO);
+        long newStudentId = studentService.addStudent(studentDTO);
 
         return ResponseEntity
-                .created(uriComponentsBuilder.path("/{id}")
+                .created(uriComponentsBuilder.path("/students/{id}")
                         .build(newStudentId))
                 .build();
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<StudentDTO> deleteStudentById(@PathVariable("id") Long studentId) {
         this.studentService.deleteStudentById(studentId);
 

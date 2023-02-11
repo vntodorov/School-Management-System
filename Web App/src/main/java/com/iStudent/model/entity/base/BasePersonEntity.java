@@ -2,7 +2,7 @@ package com.iStudent.model.entity.base;
 
 import com.iStudent.model.entity.Town;
 import com.iStudent.model.entity.enums.Gender;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class BasePersonEntity extends BaseEntityWithIdLong {

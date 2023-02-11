@@ -1,7 +1,7 @@
 package com.iStudent.model.validation;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+import javax.validation.*;
+
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

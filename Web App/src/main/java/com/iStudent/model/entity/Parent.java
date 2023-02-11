@@ -1,7 +1,8 @@
 package com.iStudent.model.entity;
 
 import com.iStudent.model.entity.base.BasePersonEntity;
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 
 import java.util.Collections;
 import java.util.HashSet;

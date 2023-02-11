@@ -1,6 +1,5 @@
 package com.iStudent.service;
 
-import com.iStudent.model.DTOs.AddStudentDTO;
 import com.iStudent.model.DTOs.StudentDTO;
 import com.iStudent.model.entity.Student;
 import com.iStudent.repository.StudentRepository;
@@ -38,7 +37,7 @@ public class StudentService {
                 .map(this::mapToStudentDTO);
     }
 
-    public long addStudent(AddStudentDTO addStudentDTO) {
+    public long addStudent(StudentDTO addStudentDTO) {
         Student student = mapper.map(addStudentDTO, Student.class);
 
         studentRepository.save(student);
@@ -47,7 +46,7 @@ public class StudentService {
     }
 
     public void deleteStudentById(Long studentId) {
-        //TODO: implement
+        studentRepository.deleteById(studentId);
     }
 
     private StudentDTO mapToStudentDTO(Student student) {

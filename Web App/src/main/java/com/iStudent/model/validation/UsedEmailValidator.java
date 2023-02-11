@@ -4,8 +4,8 @@ import com.iStudent.repository.EmployeeRepository;
 import com.iStudent.repository.ParentRepository;
 import com.iStudent.repository.StudentRepository;
 import com.iStudent.repository.TeacherRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsedEmailValidator implements ConstraintValidator<UsedEmail, String> {

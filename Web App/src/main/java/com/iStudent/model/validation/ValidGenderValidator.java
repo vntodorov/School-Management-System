@@ -1,8 +1,8 @@
 package com.iStudent.model.validation;
 
 import com.iStudent.model.entity.enums.Gender;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.*;
+
 
 import java.util.Arrays;
 

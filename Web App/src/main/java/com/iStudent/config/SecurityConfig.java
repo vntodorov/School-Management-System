@@ -18,29 +18,35 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+        return new Pbkdf2PasswordEncoder();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.
-                authorizeHttpRequests().
+                authorizeRequests().
                 requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                requestMatchers("/", "/users/login", "/users/register").permitAll().
-                requestMatchers("/pages/admins").hasRole(RolesEnum.ADMIN.name()).
+                antMatchers("/", "/login", "/students/**").permitAll().
+                antMatchers("/register").hasRole(RolesEnum.ADMIN.name()).
+                antMatchers("/clubs/**").hasRole(RolesEnum.STUDENT.name()).
+                antMatchers("/students/add", "/teachers/add", "/employees/add", "/parents/add").hasRole(RolesEnum.ADMIN.name()).
+                antMatchers("/teachers/**").hasRole(RolesEnum.TEACHER.name()).
+                antMatchers("/employees/**").hasRole(RolesEnum.EMPLOYEE.name()).
+                antMatchers("/parents/**").hasRole(RolesEnum.PARENT.name()).
+                antMatchers("/maintenance").permitAll().
                 anyRequest().
                 authenticated().
                 and().
                 formLogin().
-                loginPage("/users/login").
+                loginPage("/login").
                 usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
                 passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
                 defaultSuccessUrl("/").
-                failureForwardUrl("/users/login-error").
+                failureForwardUrl("/login-error").
                 and().
                 logout().
-                logoutUrl("/users/logout").
+                logoutUrl("/logout").
                 invalidateHttpSession(true).
                 deleteCookies("JSESSIONID");
 

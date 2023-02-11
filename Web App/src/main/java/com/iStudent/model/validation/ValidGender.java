@@ -1,8 +1,8 @@
 package com.iStudent.model.validation;
 
 import com.iStudent.model.entity.enums.Gender;
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+import javax.validation.*;
+
 
 import java.lang.annotation.*;
 

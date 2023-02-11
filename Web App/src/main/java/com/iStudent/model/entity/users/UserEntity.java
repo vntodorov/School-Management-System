@@ -1,6 +1,6 @@
 package com.iStudent.model.entity.users;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")

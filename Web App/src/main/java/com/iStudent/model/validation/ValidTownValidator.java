@@ -2,8 +2,8 @@ package com.iStudent.model.validation;
 
 import com.iStudent.model.entity.Town;
 import com.iStudent.repository.TownRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ValidTownValidator implements ConstraintValidator<ValidTown, Town> {

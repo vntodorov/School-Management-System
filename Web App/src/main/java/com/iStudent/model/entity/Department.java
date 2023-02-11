@@ -1,10 +1,8 @@
 package com.iStudent.model.entity;
 
 import com.iStudent.model.entity.base.BaseEntityWithIdLong;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
 
 import java.util.HashSet;
 import java.util.Set;

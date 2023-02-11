@@ -1,7 +1,7 @@
 package com.iStudent.model.entity;
 
 import com.iStudent.model.entity.base.BaseEntityWithIdLong;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "subjects")

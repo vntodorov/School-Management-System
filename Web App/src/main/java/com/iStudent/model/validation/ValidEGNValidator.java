@@ -1,8 +1,7 @@
 package com.iStudent.model.validation;
 
-import com.iStudent.model.entity.Town;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.*;
+
 
 public class ValidEGNValidator implements ConstraintValidator<ValidEGN, String> {
 

@@ -2,8 +2,7 @@ package com.iStudent.model.DTOs;
 
 import com.iStudent.model.validation.FieldMatch;
 import com.iStudent.model.validation.UsedEmail;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 @FieldMatch(
         first = "password",

@@ -1,9 +1,7 @@
 package com.iStudent.model.entity.base;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import javax.persistence.*;
+
 
 @MappedSuperclass
 public abstract class BaseEntityWithIdLong {
