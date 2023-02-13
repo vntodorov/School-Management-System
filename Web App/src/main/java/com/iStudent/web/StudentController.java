@@ -22,7 +22,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         return ResponseEntity
                 .ok(studentService.getAllStudents());

@@ -1,13 +1,13 @@
 package com.iStudent.repository;
 
-import com.iStudent.model.entity.Town;
+import com.iStudent.model.entity.users.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface TownRepository extends JpaRepository<Town, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    Optional<Town> findByName(String townName);
+    Optional<Role> findByRole(String role);
 }
