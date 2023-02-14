@@ -41,10 +41,10 @@ public class StudentService {
                 .map(this::mapToStudentDTO);
     }
 
-    public long addStudent(StudentDTO addStudentDTO) {
-        Town townToMap = townService.findByTownName(addStudentDTO.getTown().getName());
+    public long addStudent(StudentDTO studentDTO) {
+        Town townToMap = townService.findByTownName(studentDTO.getTown().getName());
 
-        Student student = mapper.map(addStudentDTO, Student.class);
+        Student student = mapper.map(studentDTO, Student.class);
 
         student.setTown(townToMap);
 

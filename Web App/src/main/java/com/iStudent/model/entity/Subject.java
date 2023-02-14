@@ -10,6 +10,12 @@ public class Subject extends BaseEntityWithIdLong {
     @Column
     private String name;
 
+    public Subject(){}
+
+    public Subject(String name){
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

@@ -9,5 +9,5 @@ VALUES ('Administrative and management'), ('Facilities'),('Pupil support and wel
 
 -- For development!
 
-INSERT INTO students (egn, age, email, first_name, gender, last_name, middle_name, enroll_date, town_id)
-VALUES (1234567890, 22, 'vntodorov02@gmail.com', 'Ventsislav', 'M', 'Todorov', 'Nikolaev', '2022-10-10', 1)
+--INSERT INTO students (egn, age, email, first_name, gender, last_name, middle_name, enroll_date, town_id)
+--VALUES (1234567890, 20, 'vntodorov02@gmail.com', 'Ventsislav', 'M', 'Todorov', 'Nikolaev', '2022-10-10', 1)
