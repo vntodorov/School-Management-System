@@ -46,8 +46,9 @@ A basic managment system for a virtual school - you can build, organize and cont
 ![iStudent_db](https://user-images.githubusercontent.com/107515077/210186832-8aa7fefe-8614-46aa-8d07-cf795e847c3a.png)
 
 ## ⛏ Current Status
-<p align="center">
-<b>Actively in development!</b>
+Console-Runner App - <b>Finished!</b>
+
+Web App - <b>Actively in development!</b>
 
 <b><i> Note: FULL documentation of how to use <b>iStudent</b> and details about all previous versions can be found in "DOCUMENTATION" file!</b></i>
 <p>
