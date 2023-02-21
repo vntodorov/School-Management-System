@@ -19,12 +19,15 @@ public class TeacherService {
 
     private final TownService townService;
 
+    private final SubjectService subjectService;
+
     private final ModelMapper mapper;
 
     @Autowired
-    public TeacherService(TeacherRepository teacherRepository, TownService townService, ModelMapper mapper) {
+    public TeacherService(TeacherRepository teacherRepository, TownService townService, SubjectService subjectService, ModelMapper mapper) {
         this.teacherRepository = teacherRepository;
         this.townService = townService;
+        this.subjectService = subjectService;
         this.mapper = mapper;
     }
 
@@ -40,7 +43,7 @@ public class TeacherService {
     }
 
     public long addTeacher(TeacherDTO teacherDTO) {
-        Town townToMap = townService.findByTownName(teacherDTO.getTown().getName());
+        Town townToMap = townService.findByTownId(teacherDTO.getTown().getId());
 
         Teacher teacher = mapper.map(teacherDTO, Teacher.class);
 
@@ -65,9 +68,10 @@ public class TeacherService {
 
         if (optionalTeacher.isPresent()) {
             Teacher teacher = optionalTeacher.get();
-            Subject subject = new Subject(teacherDTO.getSubject().getName());
-            teacher.setSubject(subject);
+            Long currentSubjectId = teacher.getSubject().getId();
+            teacher.setSubject(mapper.map(teacherDTO.getSubject(), Subject.class));
             teacherRepository.save(teacher);
+            subjectService.deleteSubjectById(currentSubjectId);
             return mapToTeacherDTO(teacher);
 
         }

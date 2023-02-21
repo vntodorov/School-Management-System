@@ -8,7 +8,17 @@ public class StudentDTO extends PersonEntityDTO {
 
     private final LocalDate enrollDate = LocalDate.now();
 
+    private ParentDTO parent;
+
     public LocalDate getEnrollDate() {
         return enrollDate;
+    }
+
+    public ParentDTO getParent() {
+        return parent;
+    }
+
+    public void setParent(ParentDTO parent) {
+        this.parent = parent;
     }
 }

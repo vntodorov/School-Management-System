@@ -2,7 +2,9 @@ package com.iStudent.model.DTOs;
 
 import javax.validation.constraints.NotBlank;
 
-public class SubjectDTO {
+public class DepartmentDTO {
+
+    private Long id;
 
     @NotBlank
     private String name;
@@ -13,5 +15,13 @@ public class SubjectDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 package com.iStudent.service;
 
 import com.iStudent.model.DTOs.StudentDTO;
+import com.iStudent.model.entity.Parent;
 import com.iStudent.model.entity.Student;
 import com.iStudent.model.entity.Town;
 import com.iStudent.repository.StudentRepository;
@@ -18,12 +19,15 @@ public class StudentService {
 
     private final TownService townService;
 
+    private final ParentService parentService;
+
     private final ModelMapper mapper;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, TownService townService, ModelMapper mapper) {
+    public StudentService(StudentRepository studentRepository, TownService townService, ParentService parentService, ModelMapper mapper) {
         this.studentRepository = studentRepository;
         this.townService = townService;
+        this.parentService = parentService;
         this.mapper = mapper;
     }
 
@@ -42,11 +46,16 @@ public class StudentService {
     }
 
     public long addStudent(StudentDTO studentDTO) {
-        Town townToMap = townService.findByTownName(studentDTO.getTown().getName());
+        Town townToMap = townService.findByTownId(studentDTO.getTown().getId());
+
+        Parent parentToMap = parentService.findParentById(studentDTO.getParent() != null
+                ? studentDTO.getParent().getId()
+                : 0);
 
         Student student = mapper.map(studentDTO, Student.class);
 
         student.setTown(townToMap);
+        student.setParent(parentToMap);
 
         studentRepository.save(student);
 

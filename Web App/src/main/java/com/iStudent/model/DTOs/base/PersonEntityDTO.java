@@ -3,7 +3,6 @@ package com.iStudent.model.DTOs.base;
 
 import com.iStudent.model.DTOs.TownDTO;
 import com.iStudent.model.entity.enums.Gender;
-import com.iStudent.model.validation.UniqueEmail;
 import com.iStudent.model.validation.ValidEGN;
 import com.iStudent.model.validation.ValidGender;
 import com.iStudent.model.validation.ValidTown;
@@ -11,22 +10,21 @@ import javax.validation.constraints.*;
 
 public abstract class PersonEntityDTO {
 
-    @NotNull
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 2, max = 20)
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 2, max = 20)
     private String middleName;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 2, max = 20)
     private String lastName;
 
-    @NotEmpty
+    @NotBlank
     @ValidEGN
     private String EGN;
 
@@ -41,9 +39,8 @@ public abstract class PersonEntityDTO {
     @ValidTown
     private TownDTO town;
 
-    @NotEmpty
+    @NotBlank
     @Email
-    @UniqueEmail
     private String email;
 
     public Long getId() {

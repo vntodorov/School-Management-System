@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "teachers")
 public class Teacher extends BasePersonEntity {
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 

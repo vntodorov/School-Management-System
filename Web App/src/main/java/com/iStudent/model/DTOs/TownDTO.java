@@ -1,9 +1,12 @@
 package com.iStudent.model.DTOs;
 
+import javax.validation.constraints.NotBlank;
+
 public class TownDTO {
 
     private Long id;
 
+    @NotBlank
     private String name;
 
     private CountryDTO country;

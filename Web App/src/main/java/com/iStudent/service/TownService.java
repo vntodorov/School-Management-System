@@ -15,6 +15,11 @@ public class TownService {
         this.townRepository = townRepository;
     }
 
+    public Town findByTownId(Long townId){
+        return this.townRepository.findById(townId).orElseThrow();
+    }
+
+
     public Town findByTownName(String townName){
         return this.townRepository.findByName(townName).orElseThrow();
     }

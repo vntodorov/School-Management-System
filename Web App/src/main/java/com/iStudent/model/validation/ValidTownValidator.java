@@ -1,12 +1,13 @@
 package com.iStudent.model.validation;
 
+import com.iStudent.model.DTOs.TownDTO;
 import com.iStudent.model.entity.Town;
 import com.iStudent.repository.TownRepository;
 import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ValidTownValidator implements ConstraintValidator<ValidTown, Town> {
+public class ValidTownValidator implements ConstraintValidator<ValidTown, TownDTO> {
 
     private final TownRepository townRepository;
 
@@ -16,7 +17,7 @@ public class ValidTownValidator implements ConstraintValidator<ValidTown, Town> 
     }
 
     @Override
-    public boolean isValid(Town town, ConstraintValidatorContext context) {
+    public boolean isValid(TownDTO town, ConstraintValidatorContext context) {
         return
                 townRepository
                         .findById(town.getId())
