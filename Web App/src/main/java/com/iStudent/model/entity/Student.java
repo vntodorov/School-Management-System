@@ -51,6 +51,10 @@ public class Student extends BasePersonEntity {
         this.enrollDate = enrollDate;
     }
 
+    public Parent getParent() {
+        return parent;
+    }
+
     public void setParent(Parent parent) {
         this.parent = parent;
     }
