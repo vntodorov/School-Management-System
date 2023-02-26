@@ -39,6 +39,8 @@ A basic managment system for a virtual school - you can build, organize and cont
 * [Model Mapper](https://modelmapper.org)
 * [GSON](https://github.com/google/gson)
 ---
+* [Postman](https://www.postman.com/) - <b>For the REST API (Web App)</b>
+---
 * [SOLID principles](https://www.baeldung.com/solid-principles)
 * [Design Patterns](https://refactoring.guru/design-patterns)
   
