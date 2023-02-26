@@ -46,7 +46,7 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<StudentDTO> addStudent(@Valid @RequestBody StudentDTO studentDTO,
-                                                    UriComponentsBuilder uriComponentsBuilder) {
+                                                 UriComponentsBuilder uriComponentsBuilder) {
 
         long newStudentId = studentService.addStudent(studentDTO);
 

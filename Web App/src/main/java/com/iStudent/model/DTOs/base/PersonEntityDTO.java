@@ -2,7 +2,7 @@ package com.iStudent.model.DTOs.base;
 
 
 import com.iStudent.model.DTOs.TownDTO;
-import com.iStudent.model.entity.enums.Gender;
+import com.iStudent.model.entity.enums.GenderEnum;
 import com.iStudent.model.validation.ValidEGN;
 import com.iStudent.model.validation.ValidGender;
 import com.iStudent.model.validation.ValidTown;
@@ -32,8 +32,8 @@ public abstract class PersonEntityDTO {
     @Min(14)
     private int age;
 
-    @ValidGender(anyOf = {Gender.M, Gender.F})
-    private Gender gender;
+    @ValidGender(anyOf = {GenderEnum.M, GenderEnum.F})
+    private GenderEnum genderEnum;
 
     @NotNull
     @ValidTown
@@ -91,12 +91,12 @@ public abstract class PersonEntityDTO {
         this.age = age;
     }
 
-    public Gender getGender() {
-        return gender;
+    public GenderEnum getGender() {
+        return genderEnum;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setGender(GenderEnum genderEnum) {
+        this.genderEnum = genderEnum;
     }
 
     public TownDTO getTown() {

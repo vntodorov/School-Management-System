@@ -18,7 +18,7 @@ public class Club extends BaseEntityWithIdLong {
     @Column(length = 500, columnDefinition = "text")
     private String description;
 
-    @ManyToMany(mappedBy = "clubs")
+    @ManyToMany(mappedBy = "clubs", fetch = FetchType.LAZY)
     private Set<Student> students;
 
     public Club() {

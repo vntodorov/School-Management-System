@@ -1,6 +1,6 @@
 package com.iStudent.model.validation;
 
-import com.iStudent.model.entity.enums.Gender;
+import com.iStudent.model.entity.enums.GenderEnum;
 import javax.validation.*;
 
 
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = ValidGenderValidator.class)
 public @interface ValidGender {
-    Gender[] anyOf();
+    GenderEnum[] anyOf();
 
     String message() default "Invalid Gender";
 

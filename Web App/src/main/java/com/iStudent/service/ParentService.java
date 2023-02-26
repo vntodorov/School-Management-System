@@ -77,9 +77,14 @@ public class ParentService {
 
             student.setParent(parent);
             studentRepository.save(student);
+
+            return studentRepository.findById(studentId).map(s -> mapper.map(s, StudentDTO.class));
+
+        } else {
+
+            return Optional.empty();
         }
 
-        return studentRepository.findById(studentId).map(s -> mapper.map(s, StudentDTO.class));
 
     }
 
@@ -88,7 +93,7 @@ public class ParentService {
 
         if (studentsOptional.isPresent()) {
             for (Student student : studentsOptional.get()) {
-                student.setParent(null);
+                student.removeParent();
                 studentRepository.save(student);
             }
 

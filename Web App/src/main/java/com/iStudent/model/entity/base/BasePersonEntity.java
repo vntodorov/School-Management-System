@@ -1,7 +1,7 @@
 package com.iStudent.model.entity.base;
 
 import com.iStudent.model.entity.Town;
-import com.iStudent.model.entity.enums.Gender;
+import com.iStudent.model.entity.enums.GenderEnum;
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -23,7 +23,7 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
     private int age;
 
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private GenderEnum gender;
 
     @ManyToOne
     private Town town;
@@ -59,12 +59,12 @@ public abstract class BasePersonEntity extends BaseEntityWithIdLong {
         this.lastName = lastName;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setGender(GenderEnum genderEnum) {
+        this.gender = genderEnum;
     }
 
 
-    public Gender getGender() {
+    public GenderEnum getGender() {
         return gender;
     }
 

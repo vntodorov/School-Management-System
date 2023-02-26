@@ -1,7 +1,8 @@
 package com.iStudent.model.entity;
 
 import com.iStudent.model.entity.base.BasePersonEntity;
-import com.iStudent.model.entity.enums.Mark;
+import com.iStudent.model.entity.enums.MarkEnum;
+
 import javax.persistence.*;
 
 import java.time.LocalDate;
@@ -21,11 +22,11 @@ public class Student extends BasePersonEntity {
     )
     private Set<Club> clubs;
 
-    @ElementCollection(targetClass = Mark.class, fetch = FetchType.LAZY)
+    @ElementCollection(targetClass = MarkEnum.class, fetch = FetchType.LAZY)
     @JoinTable(name = "students_marks", joinColumns = @JoinColumn(name = "student_id"))
     @Column(name = "mark", nullable = false)
     @Enumerated(EnumType.STRING)
-    private List<Mark> marks;
+    private List<MarkEnum> marks;
 
     @Column(name = "enroll_date", nullable = false)
     private LocalDate enrollDate;
@@ -39,7 +40,7 @@ public class Student extends BasePersonEntity {
         return Collections.unmodifiableSet(clubs);
     }
 
-    public List<Mark> getMarks() {
+    public List<MarkEnum> getMarks() {
         return Collections.unmodifiableList(marks);
     }
 
@@ -59,11 +60,19 @@ public class Student extends BasePersonEntity {
         this.parent = parent;
     }
 
-    public void addMark(Mark mark){
-        marks.add(mark);
+    public void addMark(MarkEnum markEnum) {
+        marks.add(markEnum);
     }
 
     public void addClub(Club club) {
         clubs.add(club);
+    }
+
+    public void removeClub(Club club) {
+        clubs.remove(club);
+    }
+
+    public void removeParent() {
+        this.parent = null;
     }
 }
