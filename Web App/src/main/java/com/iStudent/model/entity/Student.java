@@ -22,11 +22,12 @@ public class Student extends BasePersonEntity {
     )
     private Set<Club> clubs;
 
-    @ElementCollection(targetClass = MarkEnum.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "students_marks", joinColumns = @JoinColumn(name = "student_id"))
-    @Column(name = "mark", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private List<MarkEnum> marks;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "students_marks",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "mark_id", referencedColumnName = "id")
+    )
+    private List<Mark> marks;
 
     @Column(name = "enroll_date", nullable = false)
     private LocalDate enrollDate;
@@ -40,7 +41,7 @@ public class Student extends BasePersonEntity {
         return Collections.unmodifiableSet(clubs);
     }
 
-    public List<MarkEnum> getMarks() {
+    public List<Mark> getMarks() {
         return Collections.unmodifiableList(marks);
     }
 
@@ -60,8 +61,8 @@ public class Student extends BasePersonEntity {
         this.parent = parent;
     }
 
-    public void addMark(MarkEnum markEnum) {
-        marks.add(markEnum);
+    public void addMark(Mark mark) {
+        marks.add(mark);
     }
 
     public void addClub(Club club) {

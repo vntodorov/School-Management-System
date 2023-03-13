@@ -1,9 +1,13 @@
 package com.iStudent.service;
 
+import com.iStudent.model.DTOs.MarkDTO;
 import com.iStudent.model.DTOs.StudentDTO;
+import com.iStudent.model.entity.Mark;
 import com.iStudent.model.entity.Parent;
 import com.iStudent.model.entity.Student;
 import com.iStudent.model.entity.Town;
+import com.iStudent.model.entity.enums.MarkEnum;
+import com.iStudent.repository.MarkRepository;
 import com.iStudent.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,8 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
+    private final MarkRepository markRepository;
+
     private final TownService townService;
 
     private final ParentService parentService;
@@ -24,8 +30,9 @@ public class StudentService {
     private final ModelMapper mapper;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, TownService townService, ParentService parentService, ModelMapper mapper) {
+    public StudentService(StudentRepository studentRepository, MarkRepository markRepository, TownService townService, ParentService parentService, ModelMapper mapper) {
         this.studentRepository = studentRepository;
+        this.markRepository = markRepository;
         this.townService = townService;
         this.parentService = parentService;
         this.mapper = mapper;
@@ -60,6 +67,20 @@ public class StudentService {
         studentRepository.save(student);
 
         return student.getId();
+    }
+
+    public boolean addMarkToStudent(Long studentId, MarkDTO markDTO) {
+        Mark markToAdd = markRepository.findByMark(markDTO.getMark());
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            student.addMark(markToAdd);
+            studentRepository.save(student);
+            return true;
+        }
+
+        return false;
     }
 
     public void deleteStudentById(Long studentId) {

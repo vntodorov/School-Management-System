@@ -1,5 +1,6 @@
 package com.iStudent.web;
 
+import com.iStudent.model.DTOs.MarkDTO;
 import com.iStudent.model.DTOs.StudentDTO;
 import com.iStudent.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,21 @@ public class StudentController {
                 .created(uriComponentsBuilder.path("/students/{id}")
                         .build(newStudentId))
                 .build();
+    }
+
+    @PostMapping("/{id}/add/mark")
+    public ResponseEntity<StudentDTO> addMarkToStudent(@PathVariable("id") Long studentId,
+                                                       @Valid @RequestBody MarkDTO markDTO) {
+
+        if (studentService.addMarkToStudent(studentId, markDTO)) {
+            return ResponseEntity.
+                    ok().
+                    build();
+        } else {
+            return ResponseEntity.
+                    notFound().
+                    build();
+        }
     }
 
     @DeleteMapping("/{id}")
