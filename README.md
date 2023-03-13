@@ -45,7 +45,7 @@ A basic managment system for a virtual school - you can build, organize and cont
 * [Design Patterns](https://refactoring.guru/design-patterns)
   
 ## 🗂 Database Diagram
-![iStudent_db](https://user-images.githubusercontent.com/107515077/210186832-8aa7fefe-8614-46aa-8d07-cf795e847c3a.png)
+![iStudent_db](https://user-images.githubusercontent.com/107515077/224670301-a8e47782-6a98-4c3e-97be-43a9f70ca73e.png)
 
 ## ⛏ Current Status
 Console-Runner App - <b>Finished!</b>
